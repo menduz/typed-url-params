@@ -1,3 +1,6 @@
+/**
+ * @public
+ */
 export declare namespace ParseUrlParams {
   export type ParserError<T extends string> = { error: true } & T
 
@@ -13,11 +16,11 @@ export declare namespace ParseUrlParams {
     : CleanKey<State> extends `${infer Key}/`
     ? AddKeyValue<Memo, Key, string>
     : CleanKey<State> extends `${infer Key}*${infer Rest}`
-    ? ParseUrlParams<Rest, AddOptionalKeyValue<Memo, Key, string | string[]>>
+    ? ParseUrlParams<Rest, AddOptionalKeyValue<Memo, Key, string[]>>
     : CleanKey<State> extends `${infer Key}/${infer Rest}`
     ? ParseUrlParams<Rest, AddKeyValue<Memo, Key, string>>
     : CleanKey<State> extends `${infer Key}+${infer Rest}`
-    ? ParseUrlParams<Rest, AddKeyValue<Memo, Key, string | string[]>>
+    ? ParseUrlParams<Rest, AddKeyValue<Memo, Key, string[]>>
     : CleanKey<State> extends `${infer Key}?${infer Rest}`
     ? ParseUrlParams<Rest, AddOptionalKeyValue<Memo, Key, string>>
     : CleanKey<State> extends `${infer Key}.${infer Rest}`
